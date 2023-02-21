@@ -53,7 +53,7 @@ for filename in os.listdir(path_to_wav):
             # if edit_transcript == "y":
             #     text = rlinput(prompt="Edit Text: ", prefill=text)
             with open(path_to_meta, 'a') as the_file:
-                the_file.write(filename + "|" + text + "\n")
+                the_file.write(filename.split(".")[0] + "|" + text + "|\n")
         except:
             print('Sorry.. run again...')
 
