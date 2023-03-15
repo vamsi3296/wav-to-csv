@@ -24,6 +24,8 @@ path_to_wav = "./wav_audio_files"
 # listening the audio file and store in audio_text variable
 
 for filename in os.listdir(path_to_wav):
+    # There are other files like ".DS_Store" being created in the directory.
+    # So, writing a condition to skip the file.
     if filename == ".DS_Store":
         continue
     file_in_wav = os.path.join(path_to_wav, filename)
