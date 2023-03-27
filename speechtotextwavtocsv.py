@@ -1,8 +1,9 @@
 # Import library
 import speech_recognition as sr
-from playsound import playsound
+# from playsound import playsound
 import os
 import readline
+from csvsort import csvsort
 
 def rlinput(prompt, prefill=''):
     readline.set_startup_hook(lambda: readline.insert_text(prefill))
@@ -12,8 +13,8 @@ def rlinput(prompt, prefill=''):
         readline.set_startup_hook()
 
 # Name the output csv file as you wish
-path_to_meta = "./metadata.csv"
-
+name_of_meta = input("Please input the output file name: ")
+name_of_meta = name_of_meta + '.csv'
 
 
 # Initialize recognizer class (for recognizer he speech)
@@ -39,7 +40,7 @@ for filename in os.listdir(path_to_wav):
         # Hence using the exception handling
         try:
             # Using googles speech recognition
-            text = r.recognize_google(audio_text)
+            text = r.recognize_google(audio_text, language="te-IN")
             # print('Converting audio transcripts into text...')
             # print(text)
 
@@ -54,11 +55,9 @@ for filename in os.listdir(path_to_wav):
             
             # if edit_transcript == "y":
             #     text = rlinput(prompt="Edit Text: ", prefill=text)
-            with open(path_to_meta, 'a') as the_file:
+            with open(name_of_meta, 'a') as the_file:
                 the_file.write(filename.split(".")[0] + "|" + text + "|\n")
         except:
             print('Sorry.. run again...')
 
-
-
-
+csvsort(name_of_meta, [0], output_filename=name_of_meta, has_header=False, delimiter='|')
