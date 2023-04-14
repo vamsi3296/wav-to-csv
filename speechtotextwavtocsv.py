@@ -57,7 +57,11 @@ for filename in os.listdir(path_to_wav):
             #     text = rlinput(prompt="Edit Text: ", prefill=text)
             with open(name_of_meta, 'a') as the_file:
                 the_file.write(filename.split(".")[0] + "|" + text + "|\n")
+                the_file.close()
         except:
+            with open(name_of_meta, 'a') as the_file:
+                the_file.write(filename.split(".")[0] + "|TEXT GENERATION FAILED.\n")
+                the_file.close()
             print('Sorry.. run again...')
 
 csvsort(name_of_meta, [0], output_filename=name_of_meta, has_header=False, delimiter='|')
